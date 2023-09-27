@@ -56,3 +56,60 @@ string gridSearch(vector<string> G, vector<string> P)
 
     return "NO";
 }
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string t_temp;
+    getline(cin, t_temp);
+
+    int t = stoi(ltrim(rtrim(t_temp)));
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        string first_multiple_input_temp;
+        getline(cin, first_multiple_input_temp);
+
+        vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
+
+        int R = stoi(first_multiple_input[0]);
+
+        int C = stoi(first_multiple_input[1]);
+
+        vector<string> G(R);
+
+        for (int i = 0; i < R; i++) {
+            string G_item;
+            getline(cin, G_item);
+
+            G[i] = G_item;
+        }
+
+        string second_multiple_input_temp;
+        getline(cin, second_multiple_input_temp);
+
+        vector<string> second_multiple_input = split(rtrim(second_multiple_input_temp));
+
+        int r = stoi(second_multiple_input[0]);
+
+        int c = stoi(second_multiple_input[1]);
+
+        vector<string> P(r);
+
+        for (int i = 0; i < r; i++) {
+            string P_item;
+            getline(cin, P_item);
+
+            P[i] = P_item;
+        }
+
+        string result = gridSearch(G, P);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
+
