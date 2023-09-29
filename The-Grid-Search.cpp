@@ -15,7 +15,32 @@ vector<string> split(const string &);
  *  2. STRING_ARRAY P
  */
 
-string gridSearch(vector<string> G, vector<string> P)
+string gridSearch(vector<string>& G, vector<string>& P) {
+    int n = G.size();
+    int m = G[0].size();
+    int p = P.size();
+    int q = P[0].size();
+
+    for (int i = 0; i <= n - p; ++i) {
+        for (int j = 0; j <= m - q; ++j) {
+            bool match = true;
+            for (int k = 0; k < p && match; ++k) {
+                for (int l = 0; l < q && match; ++l) {
+                    if (G[i + k][j + l] != P[k][l]) {
+                        match = false;
+                    }
+                }
+            }
+            if (match) {
+                return "YES";
+            }
+        }
+    }
+
+    return "NO";
+}
+
+string gridSearch2(vector<string> G, vector<string> P)
 {
     bool state = false;
 
@@ -113,3 +138,41 @@ int main()
     return 0;
 }
 
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
+}
