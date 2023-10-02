@@ -23,8 +23,40 @@ class Result
      *  1. STRING_ARRAY G
      *  2. STRING_ARRAY P
      */
-}
 
+    public static string gridSearch(List<string> G, List<string> P)
+    {
+        int n = G.Count;
+        int m = G[0].Length;
+        int p = P.Count;
+        int q = P[0].Length;
+
+        for (int i = 0; i <= n - p; ++i)
+        {
+            for (int j = 0; j <= m - q; ++j)
+            {
+                bool match = true;
+                for (int k = 0; k < p && match; ++k)
+                {
+                    for (int l = 0; l < q && match; ++l)
+                    {
+                        if (G[i + k][j + l] != P[k][l])
+                        {
+                            match = false;
+                        }
+                    }
+                }
+                if (match)
+                {
+                    return "YES";
+                }
+            }
+        }
+
+        return "NO";
+    }    
+
+}
 
 class Solution
 {
