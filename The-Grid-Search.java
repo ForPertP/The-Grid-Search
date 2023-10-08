@@ -20,8 +20,32 @@ class Result {
      *  1. STRING_ARRAY G
      *  2. STRING_ARRAY P
      */
-}
 
+    public static String gridSearch(List<String> G, List<String> P) {
+        int n = G.size();
+        int m = G.get(0).length();
+        int p = P.size();
+        int q = P.get(0).length();
+
+        for (int i = 0; i <= n - p; ++i) {
+            for (int j = 0; j <= m - q; ++j) {
+                boolean match = true;
+                for (int k = 0; k < p && match; ++k) {
+                    for (int l = 0; l < q && match; ++l) {
+                        if (G.get(i + k).charAt(j + l) != P.get(k).charAt(l)) {
+                            match = false;
+                        }
+                    }
+                }
+                if (match) {
+                    return "YES";
+                }
+            }
+        }
+
+        return "NO";
+    }
+}
 
 public class Solution {
     public static void main(String[] args) throws IOException {
